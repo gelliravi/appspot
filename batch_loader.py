@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
 import sys
 from django.core.management import setup_environ
 sys.path.append("/home/bao/public_html/")

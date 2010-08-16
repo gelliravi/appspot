@@ -75,7 +75,7 @@ def simple(request):
     # data
     species = ["athaliana"] + outgroups
     genes = [getattr(q, x) for x in species]
-    codes = [getattr(q, x+'_code') for x in species[1:]]
+    codes = [getattr(q, x+'_code') for x in outgroups]
     
     # plot params
     lw = 5
@@ -131,7 +131,7 @@ def simple(request):
     # draw the tree branches recursively
     node = nodes[0]
     internal_nodes = []
-    for i, (x, code) in enumerate(reversed(zip(xx, codes))):
+    for i, (x, code) in enumerate(reversed(zip(xx, reversed(codes)))):
         c = 'k' if code=='S' else 'lightgrey'
         node = draw_branches(node, nodes[i+1], x, c2=c, label=code)
         internal_nodes.append(node)
@@ -144,7 +144,7 @@ def simple(request):
     
     # legends
     root.text(.5, .95, _("Positional history for gene %s" % q.athaliana), 
-            ha="center", va="center", size=size)
+            ha="center", va="center", size=size, fontweight='bold')
     root.set_xlim((0,1))
     root.set_ylim((0,1))
     root.set_axis_off()
