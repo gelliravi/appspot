@@ -1,0 +1,121 @@
+/* friendlybit.com/css/simple-css-templates/ */
+
+button {
+padding: 8px;
+}
+.ui-widget { 
+font-family: Helvetica,Verdana,Arial,sans-serif; font-size: 1em; 
+}
+.ui-icon { 
+display: inline-block; 
+}
+
+html { 
+padding:0px;
+margin:0px;
+}
+
+body {
+font-family:Helvetica,Verdana,Arial;
+background:#f8f8f8;
+color:#564b47;
+margin:0px;
+padding:0px;
+}
+
+#head {
+position:absolute;
+top:0;
+left:0;
+width:100%;
+}
+
+#left {
+width:20%;
+position:relative;
+float:left;
+}
+
+#center {
+float:left;
+margin-left:10%;
+padding:15px;
+width:41%;
+}
+
+#right {
+margin-left:53%;
+padding:15px;
+width:38%;
+}
+
+#annotations, #title, .bar-hist {
+    width: 95%;
+}
+
+.panel {
+    background-color: beige;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 15px;
+    -moz-box-shadow:0 3px 30px black;
+    -webkit-box-shadow:0 3px 30px black;
+}
+
+.shadow {
+    -moz-box-shadow:0 3px 30px black;
+    -webkit-box-shadow:0 3px 30px black;
+}
+h1,h2,h3,h4{color:#023858;}
+hr{border:none;height:0px;border-bottom:dotted #303030 1px;}
+th{text-align:left;}
+select,textarea,input[type="text"],input[type="file"],input[type="password"] {
+    font-family: monaco, "Courier New", Courier, monospace;
+    -webkit-box-sizing:border-box;
+}
+
+/* images */
+.articleimg {
+    padding:3px;
+    background:#ccc;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}
+
+.logoimg {
+    border-style:none;
+}
+
+/* table */
+table.stats {
+    text-align:center;
+    font-family:Verdana,Helvetica,sans-serif ;
+    font-size:11px;
+    width:99%;
+    border:0px;
+    border-collapse:collapse;
+    border-spacing:0px;
+}
+table.stats tr {
+    background-color:#fafafa;
+    color:black;
+    text-align:center;
+    border:1px white solid;
+}
+table.stats tr.acc {
+    background-color:gold;
+    color:red;
+}
+table.stats tr.hed {
+    background-color:dimgray;
+    color:white;
+    border-bottom:2px #fff solid;
+    font-size:12px;
+    font-weight:bold;
+}
+table.stats td {
+    padding:5px;
+    border:1px white solid;
+}

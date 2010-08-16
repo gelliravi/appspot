@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <title> Positional history of A. thaliana genes </title>
+    <link rel="stylesheet" type="text/css" 
+    href="/static/smoothness/jquery-ui-1.8.1.custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/site.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+    <script type="text/javascript"
+        src="http://gettopup.com/releases/latest/top_up-min.js"></script>
+    <script type="text/javascript" src="/static/site.js"></script>
+  </head>
+  <body>
+      <div id="center">
+      <div class="panel">
+          <h2> Positional history of <i>A. thaliana</i> genes
+         </h2>
+      </div>
+      <br />
+
+      <div class="panel" style="height:70%;">
+          <form style="color:green;">
+          Enter <i>A.thaliana</i> gene ID or description:
+          <input id="gid" name="gid" type="text" value="{{ gid }}" style="color:red; font-weight: bold;" /> 
+          (e.g. <a href="#" onclick="show_example('At5g54690');">At5g54690</a>,
+          <a href="#" onclick="show_example('F-box')">F-box</a>,
+          <a href="#" onclick="show_example('MADS-box')">MADS-box</a>) 
+          <br />
+          <b>or</b> Specify the <a href="#"
+              onclick="$('#synteny').toggle(); $('#gid').val('');">synteny</a> in outgroup lineages
+          <br />
+          <br />
+          <div id="synteny" style="display:none;">
+              {% for o in outgroups %} 
+              <div class="radio">
+                {{ o }}: 
+                <input type="radio" id="{{ o }}-radio1" value="A" name="{{ o }}" checked="checked">
+                <label for="{{ o }}-radio1">All</label>
+                <input type="radio" id="{{ o }}-radio2" value="S" name="{{ o }}">
+                <label for="{{ o }}-radio2">Stable</label>
+                <input type="radio" id="{{ o }}-radio3" value="F" name="{{ o }}">
+                <label for="{{ o }}-radio3">Moved</label>
+              </div>
+              {% endfor %}
+          </div>
+          </form>
+          <button onclick="submit();">Submit</button>
+          <button onclick="reset();">Reset</button>
+          <hr />
+          <div id="response">
+              <table class='stats'>
+              {% if response %}
+              <tr class='hed'>
+                  <td> athaliana  </td>
+                  <td> description </td>
+                  <td> lyrata </td>
+                  <td> papaya </td>
+                  <td> peach </td>
+                  <td> grape </td>
+                  <td> link </td>
+              </tr>
+              {% endif %}
+              {% for g in response %}
+              <tr>
+                <td><a href='/athaliana/query?gid={{ g.athaliana }}'> {{ g.athaliana }} </a></td>
+                <td> {{ g.description }} </td>
+                <td> {{ g.lyrata_code }} </td>
+                <td> {{ g.papaya_code }} </td>
+                <td> {{ g.peach_code }} </td>
+                <td> {{ g.grape_code }} </td>
+                <td><a target='_blank' href='{{ g.gevolink }}'> CoGe Link </a></td>
+              </tr>
+              {% endfor %}
+              </table>
+              <div id="details">
+                  {{ details }}
+              </div>
+          </div>
+    </div>
+    </div>
+
+    <div id="right">
+        <div class="panel">
+        <h3> Data source: </h3> 
+        <a href="ftp://ftp.arabidopsis.org/home/tair/Genes/TAIR9_genome_release/">TAIR
+            ver 9</a> |
+        <a
+            href="ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Alyrata">lyrata</a>
+        |
+        <a href="ftp://asgpb.mhpcc.hawaii.edu/papaya/">papaya</a> |
+        <a
+            href="ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppersica">peach</a>
+        |
+        <a href="http://www.genoscope.cns.fr/externe/GenomeBrowser/Vitis/">grape
+            ver 2</a><br />
+        (processed and loaded into <a target="_blank" href="http://genomevolution.org">CoGe</a>)
+        <h3> Methods: </h3> 
+        <a href="#" onclick="$('#dialog').toggle();"> Click here </a> 
+        <br />
+        <br />
+        <div id="dialog" style="display: none"> 
+            {% include "methods.html" %}
+        </div>
+        </div>
+        <br />
+        <div class="panel">
+        <h3> Credits: </h3> 
+        Maggie, Haibao, Brent, Mike in <a
+            href='http://microscopy.berkeley.edu/~freeling/'> Freeling lab</a>, UC Berkeley <br />
+        <h3> Contact: </h3>
+        haibao at berkeley dot edu
+        <h3> Funding: </h3> <a
+            href="http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=0820821">
+            <img class="logoimg" src="/static/heads.gif" alt="nsf" /></a>
+        </div>
+        <br />
+    </div>
+
+  </body>
+</html>

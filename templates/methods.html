@@ -1,0 +1,42 @@
+<p>
+For every query arabidopsis gene, we found a 40 gene window centered on
+it, and check if we can find syntenic region in the target genome. We used
+LASTZ (default parameters) to define anchors, and require the
+syntenic region to have at least 4 collinear anchors (out of 40 possible
+anchors). Nearest anchors on both sides of genes are identified, in order to
+define a "tight" syntenic location. 
+</p>
+
+<p>
+Each query gene is then categorized, based on the flank anchors and more sensitive search on the tight
+interval. 
+</p>
+<ul>
+    <li> 
+    Gene match in the interval - syntelog (<b>S</b>) or no syntelog
+    (<b>F</b>)
+    </li>
+    <li>
+    Have both flankers (<b>F</b>) or one flanker (<b>G</b>)
+    </li>
+</ul>
+
+<p>
+For genes labeled as <b>F</b>, further validate.
+</p>
+<ul>
+    <li>
+    BLAST matches (e.g. to non-coding sequences) in the interval (<b>FB</b>)
+    </li>
+    <li>
+    Assembly gaps (N's) in the interval (<b>FN</b>)
+    </li>
+</ul>
+<p>
+<a href="/static/example1.png" class="top_up">
+<img class="logoimg" src="/static/example1s.png" alt="" / >
+</a>
+<a href="/static/example2.png" class="top_up">
+<img class="logoimg" src="/static/example2s.png" alt="" / >
+</a>
+</p>
