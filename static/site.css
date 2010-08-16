@@ -79,6 +79,8 @@ select,textarea,input[type="text"],input[type="file"],input[type="password"] {
 .articleimg {
     padding:3px;
     background:#ccc;
+    width: 480px;
+    height: auto;
     border-radius:5px;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;

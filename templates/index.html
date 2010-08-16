@@ -74,9 +74,12 @@
               {% endfor %}
               </table>
               <div id="details">
-                  {% if img  %}
+                  {% if single %}
                   <hr />
-                  <img class='articleimg' src='{{ img }}' alt='' />
+                  <a target='_blank' href='{{ single.gevo_link }}'>
+                  <img class='articleimg'
+                  src='/athaliana/simple.png?gid={{single.athaliana}}' alt='' />
+                  </a>
                   {% endif %}
               </div>
           </div>
