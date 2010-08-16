@@ -19,7 +19,7 @@
       </div>
       <br />
 
-      <div class="panel" style="height:70%;">
+      <div class="panel" style="height:85%;">
           <form style="color:green;">
           Enter <i>A.thaliana</i> gene ID or description:
           <input id="gid" name="gid" type="text" value="{{ gid }}" style="color:red; font-weight: bold;" /> 
@@ -69,12 +69,15 @@
                 <td> {{ g.papaya_code }} </td>
                 <td> {{ g.peach_code }} </td>
                 <td> {{ g.grape_code }} </td>
-                <td><a target='_blank' href='{{ g.gevolink }}'> CoGe Link </a></td>
+                <td><a target='_blank' href='{{ g.gevo_link }}'> CoGe Link </a></td>
               </tr>
               {% endfor %}
               </table>
               <div id="details">
-                  {{ details }}
+                  {% if img  %}
+                  <hr />
+                  <img class='articleimg' src='{{ img }}' alt='' />
+                  {% endif %}
               </div>
           </div>
     </div>

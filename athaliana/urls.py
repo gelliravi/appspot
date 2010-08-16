@@ -4,4 +4,5 @@ urlpatterns = patterns('bao.athaliana.views',
     (r'^$', 'index'),
     (r'^query$', 'query'),
     (r'^autocomplete$', 'autocomplete'),
+    (r'^simple.png$', 'simple'),
 )
