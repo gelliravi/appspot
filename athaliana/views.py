@@ -24,7 +24,7 @@ def query(request):
         if gid.upper().startswith('AT'):
             query = Syntelog.objects.filter(athaliana__iexact=gid)
         else:
-            query = Syntelog.objects.filter(description__istartswith=gid)
+            query = Syntelog.objects.filter(description__icontains=gid)
     else:
         query = Syntelog.objects.all()
         for o in outgroups:
@@ -167,7 +167,7 @@ def simple(request):
     # print out
     canvas = FigureCanvas(fig)
     response=HttpResponse(content_type='image/png')
-    canvas.print_figure(response, format="png", dpi=80)
+    canvas.print_figure(response, format="png", dpi=60)
 
     return response
 

@@ -6,7 +6,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Example:
-    (r'^athaliana/', include('bao.athaliana.urls')),
     (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url':
         '/static/favicon.ico'}),
 
@@ -16,4 +15,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+    (r'^', include('bao.athaliana.urls')),
 )

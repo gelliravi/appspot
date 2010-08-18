@@ -10,7 +10,7 @@ setup_environ(settings)
 from bao.athaliana.models import Syntelog 
 
 import csv
-reader = csv.DictReader(open("/home/bao/public_html/appspot/data/data.csv"))
+reader = csv.DictReader(open("data/data.csv"))
    
 for i, row in enumerate(reader):
     if i % 1000 == 0: print >>sys.stderr, i, "records loaded"
