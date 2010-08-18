@@ -8,13 +8,19 @@ function reset() {
 };
 
 function submit() {
-    var url = "/athaliana/query";
     var params = $('form').serialize();
-    var query = url + "?" + params;
     $('#response').html();
 
-    window.location = query;
+    window.location = "?" + params;
 };
+
+function page(p) {
+    var params = $('form').serialize();
+    params += '&page=' + p;
+    $('#response').html();
+    
+    window.location = "?" + params;
+}
 
 $(function() {
     $("button, input[type=submit], input[type=reset]").button();

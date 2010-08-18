@@ -61,7 +61,7 @@
                   <td> link </td>
               </tr>
               {% endif %}
-              {% for g in response %}
+              {% for g in response.object_list %}
               <tr>
                 <td><a href='/athaliana/query?gid={{ g.athaliana }}'> {{ g.athaliana }} </a></td>
                 <td> {{ g.description }} </td>
@@ -73,6 +73,20 @@
               </tr>
               {% endfor %}
               </table>
+              <div class='pagination'>
+                  <span class='step-links'>
+                      Total {{ counts }} records. 
+                      {% if response.has_previous %}
+                        <a href='#' onclick='page({{ response.previous_page_number }});'> Prev </a>
+                      {% endif %}
+                      <span class='current'>
+                          Page {{ response.number }} of {{ response.paginator.num_pages }}.
+                      </span>
+                      {% if response.has_next %}
+                        <a href='#' onclick='page({{ response.next_page_number }});'> Next </a>
+                      {% endif %}
+                  </span>
+              </div>
               <div id="details">
                   {% if single %}
                   <hr />

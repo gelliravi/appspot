@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.utils import simplejson as json
+from django.core.paginator import Paginator
 
 from bao.athaliana.models import Syntelog
 
@@ -18,6 +19,7 @@ def index(request):
 # the core query
 def query(request):
     gid = request.GET.get('gid', '').strip()
+
     if gid:
         if gid.upper().startswith('AT'):
             query = Syntelog.objects.filter(athaliana__iexact=gid)
@@ -30,16 +32,29 @@ def query(request):
             if term=='A': continue
             query = query.filter(**{o+'_code': term})
 
-    query = query.order_by('athaliana')[:10]
+    all_query = query.order_by('athaliana')
+    counts = all_query.count()
+    paginator = Paginator(all_query, 10)
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError: 
+        page = 1
+
+    try:
+        query = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        query = paginator.page(paginator.num_pages)
 
     params = {
             'gid': gid,
             'response': query,
             'outgroups': outgroups,
+            'counts': counts,
             }
     
-    if query.count()==1:
-        params.update(single=query[0])
+    if all_query.count()==1:
+        params.update(single=query.object_list[0])
 
     output = render_to_response('index.html', params)
     return output
