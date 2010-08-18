@@ -8,18 +8,20 @@ function reset() {
 };
 
 function submit() {
+    var url = '/athaliana/query'
     var params = $('form').serialize();
     $('#response').html();
 
-    window.location = "?" + params;
+    window.location = url + "?" + params;
 };
 
 function page(p) {
+    var url = '/athaliana/query'
     var params = $('form').serialize();
     params += '&page=' + p;
     $('#response').html();
     
-    window.location = "?" + params;
+    window.location = url + "?" + params;
 }
 
 $(function() {

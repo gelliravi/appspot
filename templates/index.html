@@ -7,8 +7,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript"
         src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
-    <script type="text/javascript"
-        src="http://gettopup.com/releases/latest/top_up-min.js"></script>
+    <script type="text/javascript" src="/static/top_up-min.js"></script>
     <script type="text/javascript" src="/static/site.js"></script>
   </head>
   <body>
@@ -49,30 +48,7 @@
           <button onclick="reset();">Reset</button>
           <hr />
           <div id="response">
-              <table class='stats'>
               {% if response %}
-              <tr class='hed'>
-                  <td> athaliana  </td>
-                  <td> description </td>
-                  <td> lyrata </td>
-                  <td> papaya </td>
-                  <td> peach </td>
-                  <td> grape </td>
-                  <td> link </td>
-              </tr>
-              {% endif %}
-              {% for g in response.object_list %}
-              <tr>
-                <td><a href='/athaliana/query?gid={{ g.athaliana }}'> {{ g.athaliana }} </a></td>
-                <td> {{ g.description }} </td>
-                <td> {{ g.lyrata_code }} </td>
-                <td> {{ g.papaya_code }} </td>
-                <td> {{ g.peach_code }} </td>
-                <td> {{ g.grape_code }} </td>
-                <td><a target='_blank' href='{{ g.gevo_link }}'> CoGe Link </a></td>
-              </tr>
-              {% endfor %}
-              </table>
               <div class='pagination'>
                   <span class='step-links'>
                       Total {{ counts }} records. 
@@ -87,6 +63,29 @@
                       {% endif %}
                   </span>
               </div>
+              <table class='stats'>
+              <tr class='hed'>
+                  <td> athaliana  </td>
+                  <td> description </td>
+                  <td> lyrata </td>
+                  <td> papaya </td>
+                  <td> peach </td>
+                  <td> grape </td>
+                  <td> link </td>
+              </tr>
+              {% for g in response.object_list %}
+              <tr>
+                <td><a href='/athaliana/query?gid={{ g.athaliana }}'> {{ g.athaliana }} </a></td>
+                <td> {{ g.description }} </td>
+                <td> {{ g.lyrata_code }} </td>
+                <td> {{ g.papaya_code }} </td>
+                <td> {{ g.peach_code }} </td>
+                <td> {{ g.grape_code }} </td>
+                <td><a target='_blank' href='{{ g.gevo_link }}'> CoGe Link </a></td>
+              </tr>
+              {% endfor %}
+              </table>
+              {% endif %}
               <div id="details">
                   {% if single %}
                   <hr />

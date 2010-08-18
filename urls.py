@@ -7,6 +7,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     (r'^athaliana/', include('bao.athaliana.urls')),
+    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url':
+        '/static/favicon.ico'}),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
