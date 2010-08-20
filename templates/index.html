@@ -30,7 +30,7 @@
               onclick="$('#synteny').toggle(); $('#gid').val('');">synteny</a> in outgroup lineages
           <br />
           <br />
-          <div id="synteny" style="display:none;">
+          <div id="synteny">
               {% for o in outgroups %} 
               <div class="radio">
                 {{ o }}: 
@@ -53,13 +53,15 @@
                   <span class='step-links'>
                       Total {{ counts }} records. 
                       {% if response.has_previous %}
-                        <a href='#' onclick='page({{ response.previous_page_number }});'> Prev </a>
+                      <a href='#' onclick="page({{ response.previous_page_number }}, 
+                          '{{ query_str|safe }}');"> Prev </a>
                       {% endif %}
                       <span class='current'>
                           Page {{ response.number }} of {{ response.paginator.num_pages }}.
                       </span>
                       {% if response.has_next %}
-                        <a href='#' onclick='page({{ response.next_page_number }});'> Next </a>
+                      <a href='#' onclick="page({{ response.next_page_number }}, 
+                          '{{ query_str|safe }}');"> Next </a>
                       {% endif %}
                   </span>
               </div>

@@ -19,6 +19,10 @@ def index(request):
 # the core query
 def query(request):
     gid = request.GET.get('gid', '').strip()
+    query_dict = request.GET.copy()
+    if 'page' in query_dict: 
+        query_dict.pop('page')
+    query_str = query_dict.urlencode()
 
     if gid:
         if gid.upper().startswith('AT'):
@@ -30,7 +34,11 @@ def query(request):
         for o in outgroups:
             term = request.GET.get(o, 'A')
             if term=='A': continue
-            query = query.filter(**{o+'_code': term})
+            d = {o+'_code': 'S'}
+            if term=='S':
+                query = query.filter(**d)
+            else:
+                query = query.exclude(**d)
 
     all_query = query.order_by('athaliana')
     counts = all_query.count()
@@ -51,9 +59,10 @@ def query(request):
             'response': query,
             'outgroups': outgroups,
             'counts': counts,
+            'query_str': query_str,
             }
     
-    if all_query.count()==1:
+    if counts==1:
         params.update(single=query.object_list[0])
 
     output = render_to_response('index.html', params)

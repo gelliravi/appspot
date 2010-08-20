@@ -15,10 +15,9 @@ function submit() {
     window.location = url + "?" + params;
 };
 
-function page(p) {
+function page(p, query_str) {
     var url = '/athaliana/query'
-    var params = $('form').serialize();
-    params += '&page=' + p;
+    var params = query_str + '&page=' + p; 
     $('#response').html();
     
     window.location = url + "?" + params;
