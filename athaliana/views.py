@@ -23,22 +23,22 @@ def query(request):
     if 'page' in query_dict: 
         query_dict.pop('page')
     query_str = query_dict.urlencode()
+    query = Syntelog.objects.all()
 
     if gid:
         if gid.upper().startswith('AT'):
-            query = Syntelog.objects.filter(athaliana__iexact=gid)
+            query = query.filter(athaliana__iexact=gid)
         else:
-            query = Syntelog.objects.filter(description__icontains=gid)
-    else:
-        query = Syntelog.objects.all()
-        for o in outgroups:
-            term = request.GET.get(o, 'A')
-            if term=='A': continue
-            d = {o+'_code': 'S'}
-            if term=='S':
-                query = query.filter(**d)
-            else:
-                query = query.exclude(**d)
+            query = query.filter(description__icontains=gid)
+
+    for o in outgroups:
+        term = request.GET.get(o, 'A')
+        if term=='A': continue
+        d = {o+'_code': 'S'}
+        if term=='S':
+            query = query.filter(**d)
+        else:
+            query = query.exclude(**d)
 
     all_query = query.order_by('athaliana')
     counts = all_query.count()
