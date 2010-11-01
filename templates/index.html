@@ -39,7 +39,7 @@
                 <input type="radio" id="{{ o }}-radio2" value="S" name="{{ o }}">
                 <label for="{{ o }}-radio2">Stable</label>
                 <input type="radio" id="{{ o }}-radio3" value="F" name="{{ o }}">
-                <label for="{{ o }}-radio3">Moved</label>
+                <label for="{{ o }}-radio3">Unstable</label>
               </div>
               {% endfor %}
           </div>
@@ -123,8 +123,12 @@
         <div id="dialog" style="display: none"> 
             {% include "methods.html" %}
         </div>
+
+        <h3> Disclaimer: </h3>
+        <br />
         </div>
         <br />
+
         <div class="panel">
         <h3> Credits: </h3> 
         Maggie, Haibao, Brent, Mike in <a

@@ -11,3 +11,19 @@ The *positional history* refers to whether a gene can be found in its syntenic
 locations in a few outgroup species with increasing phylogenetic distance to
 `A. thaliana` (`A. lyrata`, papaya, peach, grape).
 
+Server configuration
+---------------------
+Modify apache conf to include lines similar to the following::
+
+    WSGIScriptAlias /athaliana /youraddress/django.wsgi
+    <Directory "/home/bao/public_html/bao/apache">
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    Alias /static "youraddress/static"
+    <Directory "/home/bao/public_html/bao/static">
+        Order allow,deny
+        Allow from all
+    </Directory>
+
