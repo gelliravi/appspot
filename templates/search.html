@@ -1,12 +1,20 @@
 <h1> Search <i>A. thaliana</i> genes </h1>
-<p>
-<div class="panel" style="height:85%;">
   <form style="color:green;">
+<p>
   Enter <i>A.thaliana</i> gene ID or description:
-  <input id="gid" name="gid" type="text" value="{{ gid }}" style="color:red; font-weight: bold;" /> 
+  <input id="gid" name="gid" type="text" value="{{ gid }}" size="30"
+  style="color:red; font-weight: bold;" /> 
   (e.g. <a href="#" onclick="show_example('At5g54690');">At5g54690</a>,
-  <a href="#" onclick="show_example('F-box')">F-box</a>,
-  <a href="#" onclick="show_example('MADS-box')">MADS-box</a>) 
+  <a href="#" onclick="show_example('U-box')">U-box</a>,
+  <a href="#" onclick="show_example('MADS-box')">MADS-box</a> 
+  ) 
+  <br />
+  <b>or</b> Select a specific TAIR gene family
+  <select onchange="show_example($(this).val())">
+  {% for f in families %}
+    <option value="{{ f }}"> {{ f }} </option>
+  {% endfor %}
+  </select>
   <br />
   <b>or</b> Specify the <a href="#"
       onclick="$('#synteny').toggle(); $('#gid').val('');">synteny</a> in outgroup lineages
@@ -25,6 +33,7 @@
       </div>
       {% endfor %}
   </div>
+</p>
   </form>
   <button onclick="submit();">Submit</button>
   <button onclick="reset();">Reset</button>
@@ -74,11 +83,8 @@
           {% if single %}
           <hr />
           <a target='_blank' href='{{ single.gevo_link }}'>
-          <img class='articleimg'
-          src='/athaliana/simple.png?gid={{single.athaliana}}' alt='' />
+          <img src='/athaliana/simple.png?gid={{single.athaliana}}' alt='' />
           </a>
           {% endif %}
       </div>
   </div>
-    </div>
-</p>

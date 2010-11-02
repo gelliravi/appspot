@@ -2,16 +2,25 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.utils import simplejson as json
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 from bao.athaliana.models import Syntelog
 
 outgroups = ["lyrata", "papaya", "poplar", "grape"]
 
+
+def get_families():
+    q = Syntelog.objects.values("gene_family").annotate(num_genes=Count('id'))
+    return sorted(x["gene_family"] for x in q if x["num_genes"] >= 10)
+
+
 # Create your views here.
 def index(request):
+    # retrieve the gene families first
     params = {
             'outgroups': outgroups,
             'page_template': "search.html",
+            'families': get_families(),
             }
     output = render_to_response('index.html', params)
     return output 
@@ -46,7 +55,8 @@ def query(request):
         if gid.upper().startswith('AT'):
             query = query.filter(athaliana__iexact=gid)
         else:
-            query = query.filter(description__icontains=gid)
+            #query = query.filter(description__icontains=gid)
+            query = query.filter(gene_family__icontains=gid)
 
     for o in outgroups:
         term = request.GET.get(o, 'A')
@@ -78,6 +88,7 @@ def query(request):
             'counts': counts,
             'query_str': query_str,
             'page_template': "search.html",
+            'families': get_families(),
             }
     
     if counts==1:
@@ -122,7 +133,7 @@ def simple(request):
     # plot params
     lw = 5
     ms = 12
-    size = 15
+    size = 12
 
     # taxa labels
     ytop = .9
@@ -130,7 +141,7 @@ def simple(request):
     nodes = []
     for s, g, code in zip(species, genes, ['S'] + codes):
         c = 'k' if code=='S' else 'lightgrey'
-        root.text(.8, ytop, _(g), ha='center', color=c, size=size)
+        root.text(.8, ytop+.01, _(g), ha='center', color=c, size=size)
         root.text(.8, ytop-.01, _(s), ha='center', va='top', color=c, size=size,
                 fontstyle='italic')
         nodes.append((.7, ytop))
@@ -152,7 +163,7 @@ def simple(request):
     for label, div in labels:
         xstart += xinterval
         xx.append(xstart)
-        root.text(xstart, .2, _("%s (%dmya)" % (label, div)), color="g", 
+        root.text(xstart, .2-.01, _("%s (%dmya)" % (label, div)), color="g", 
                     rotation=20, ha='right', va='top', size=size)
     root.plot((.1,.7), (.2,.2), ':', color='gray', lw=lw)
     root.plot(xx, [.2] * len(xx), "go", mec="g", mfc="w", mew=lw, ms=ms)
@@ -167,7 +178,7 @@ def simple(request):
         root.plot((height, height), (y1, half_y), '-', color=c1, lw=lw)
         root.plot((height, height), (y2, half_y), '-', color=c2, lw=lw)
         # the synteny code on the corner of branches
-        root.text(height+.01, y2+.01, _(label), color=c2, size=size)
+        root.text(height-.01, y2+.01, _(label), color=c2, size=size, ha="right")
         return cnode
     
     # draw the tree branches recursively
@@ -194,7 +205,7 @@ def simple(request):
     # print out
     canvas = FigureCanvas(fig)
     response=HttpResponse(content_type='image/png')
-    canvas.print_figure(response, format="png", dpi=60)
+    canvas.print_figure(response, format="png")
 
     return response
 

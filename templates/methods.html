@@ -1,7 +1,8 @@
 
 <h1> Data source: </h1> 
 <p>
-<a href="ftp://ftp.arabidopsis.org/home/tair/Genes/TAIR9_genome_release/">TAIR
+<a
+    href="ftp://ftp.arabidopsis.org/home/tair/Genes/TAIR9_genome_release/">athaliana TAIR
     ver 9</a> |
 <a
     href="ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Alyrata">lyrata</a>
@@ -24,7 +25,9 @@ it, and check if we can find syntenic region in the target genome. We used
 LASTZ (default parameters) to define anchors, and require the
 syntenic region to have at least 4 collinear anchors (out of 40 possible
 anchors). Nearest anchors on both sides of genes are identified, in order to
-define a "tight" syntenic location. 
+define a "tight" syntenic location. The entire pipeline is a collection of
+Python scripts accessible <a target="_blank" 
+    href="https://github.com/tanghaibao/positional-history"> here </a>. 
 </p>
 
 <p>
@@ -64,5 +67,9 @@ For genes labeled as <b>F</b>, further validate.
 
 <h1> Disclaimer: </h1>
 <p>
+This is a whole genome analysis pipeline that is dependent on many rules and
+parameters (sometimes arbitrary). We tried our best to minimize the error rate, 
+but we note that this data is not completely error-free, although we did manually 
+validate about half of the data in this database. Please use with caution.
 </p>
 <br />
