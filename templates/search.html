@@ -1,0 +1,84 @@
+<h1> Search <i>A. thaliana</i> genes </h1>
+<p>
+<div class="panel" style="height:85%;">
+  <form style="color:green;">
+  Enter <i>A.thaliana</i> gene ID or description:
+  <input id="gid" name="gid" type="text" value="{{ gid }}" style="color:red; font-weight: bold;" /> 
+  (e.g. <a href="#" onclick="show_example('At5g54690');">At5g54690</a>,
+  <a href="#" onclick="show_example('F-box')">F-box</a>,
+  <a href="#" onclick="show_example('MADS-box')">MADS-box</a>) 
+  <br />
+  <b>or</b> Specify the <a href="#"
+      onclick="$('#synteny').toggle(); $('#gid').val('');">synteny</a> in outgroup lineages
+  <br />
+  <br />
+  <div id="synteny">
+      {% for o in outgroups %} 
+      <div class="radio">
+        {{ o }}: 
+        <input type="radio" id="{{ o }}-radio1" value="A" name="{{ o }}" checked="checked">
+        <label for="{{ o }}-radio1">All</label>
+        <input type="radio" id="{{ o }}-radio2" value="S" name="{{ o }}">
+        <label for="{{ o }}-radio2">Stable</label>
+        <input type="radio" id="{{ o }}-radio3" value="F" name="{{ o }}">
+        <label for="{{ o }}-radio3">Unstable</label>
+      </div>
+      {% endfor %}
+  </div>
+  </form>
+  <button onclick="submit();">Submit</button>
+  <button onclick="reset();">Reset</button>
+  <hr />
+  <div id="response">
+      {% if response %}
+      <div class='pagination'>
+          <span class='step-links'>
+              Total {{ counts }} records. 
+              {% if response.has_previous %}
+              <a href='#' onclick="page({{ response.previous_page_number }}, 
+                  '{{ query_str|safe }}');"> Prev </a>
+              {% endif %}
+              <span class='current'>
+                  Page {{ response.number }} of {{ response.paginator.num_pages }}.
+              </span>
+              {% if response.has_next %}
+              <a href='#' onclick="page({{ response.next_page_number }}, 
+                  '{{ query_str|safe }}');"> Next </a>
+              {% endif %}
+          </span>
+      </div>
+      <table class='stats'>
+      <tr class='hed'>
+          <td> athaliana  </td>
+          <td> description </td>
+          <td> lyrata </td>
+          <td> papaya </td>
+          <td> poplar </td>
+          <td> grape </td>
+          <td> link </td>
+      </tr>
+      {% for g in response.object_list %}
+      <tr>
+        <td><a href='/athaliana/query?gid={{ g.athaliana }}'> {{ g.athaliana }} </a></td>
+        <td> {{ g.description }} </td>
+        <td> {{ g.lyrata_code }} </td>
+        <td> {{ g.papaya_code }} </td>
+        <td> {{ g.poplar_code }} </td>
+        <td> {{ g.grape_code }} </td>
+        <td><a target='_blank' href='{{ g.gevo_link }}'> CoGe Link </a></td>
+      </tr>
+      {% endfor %}
+      </table>
+      {% endif %}
+      <div id="details">
+          {% if single %}
+          <hr />
+          <a target='_blank' href='{{ single.gevo_link }}'>
+          <img class='articleimg'
+          src='/athaliana/simple.png?gid={{single.athaliana}}' alt='' />
+          </a>
+          {% endif %}
+      </div>
+  </div>
+    </div>
+</p>

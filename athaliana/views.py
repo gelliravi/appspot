@@ -11,6 +11,23 @@ outgroups = ["lyrata", "papaya", "poplar", "grape"]
 def index(request):
     params = {
             'outgroups': outgroups,
+            'page_template': "search.html",
+            }
+    output = render_to_response('index.html', params)
+    return output 
+
+
+def methods(request):
+    params = {
+            'page_template': "methods.html",
+            }
+    output = render_to_response('index.html', params)
+    return output 
+
+
+def contact(request):
+    params = {
+            'page_template': "contact.html",
             }
     output = render_to_response('index.html', params)
     return output 
@@ -60,6 +77,7 @@ def query(request):
             'outgroups': outgroups,
             'counts': counts,
             'query_str': query_str,
+            'page_template': "search.html",
             }
     
     if counts==1:
