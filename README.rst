@@ -9,7 +9,9 @@ interactively browse the results of the positional history of `A. thaliana`
 genes from `Freeling lab <http://microscopy.berkeley.edu/~freeling/>`_, UC Berkeley.
 The *positional history* refers to whether a gene can be found in its syntenic
 locations in a few outgroup species with increasing phylogenetic distance to
-`A. thaliana` (`A. lyrata`, papaya, peach, grape).
+`A. thaliana` (`A. lyrata`, papaya, poplar, grape). The pipeline to run the
+positional history is accessible `here
+<https://github.com/tanghaibao/positional-history>`_.
 
 Server configuration
 ---------------------
