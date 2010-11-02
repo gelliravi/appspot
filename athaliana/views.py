@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 
 from bao.athaliana.models import Syntelog
 
-outgroups = ["lyrata", "papaya", "peach", "grape"]
+outgroups = ["lyrata", "papaya", "poplar", "grape"]
 
 # Create your views here.
 def index(request):
@@ -98,7 +98,7 @@ def simple(request):
 
     # data
     species = ["athaliana"] + outgroups
-    genes = [getattr(q, x) for x in species]
+    genes = [q.athaliana] + [getattr(q, x+'1') for x in species[1:]]
     codes = [getattr(q, x+'_code') for x in outgroups]
     
     # plot params
