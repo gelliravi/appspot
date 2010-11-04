@@ -22,10 +22,10 @@ ver 2</a>
 <p>
 For every query arabidopsis gene, we found a 40 gene window centered on
 it, and check if we can find syntenic region in the target genome. We used
-LASTZ (default parameters) to define anchors, and require the
-syntenic region to have at least 4 collinear anchors (out of 40 possible
-anchors). Nearest anchors on both sides of genes are identified, in order to
-define a "tight" syntenic location. The entire pipeline is a collection of
+<a href="http://www.bx.psu.edu/~rsharris/lastz/">LASTZ</a> (default parameters) 
+to define anchors. We require syntenic region to have at least 4 collinear anchors 
+(out of 40 possible anchors). Nearest anchors on both sides of genes are identified, 
+in order to define a "tight" syntenic location. The entire pipeline is a collection of
 Python scripts accessible <a target="_blank" 
     href="https://github.com/tanghaibao/positional-history"> here </a>. 
 </p>
@@ -42,10 +42,13 @@ interval.
     <li>
     Have both flankers (<b>F</b>) or one flanker (<b>G</b>)
     </li>
+    <li>
+    No apparent synteny or missing data (<b>-</b>)
+    </li>
 </ul>
 
 <p>
-For genes labeled as <b>F</b>, further validate.
+For genes labeled as <b>F</b>, further validate on two additional checks.
 </p>
 <ul>
     <li>
@@ -55,6 +58,13 @@ For genes labeled as <b>F</b>, further validate.
     Assembly gaps (N's) in the interval (<b>FN</b>)
     </li>
 </ul>
+<p>
+Poplar has a lineage-specific genome duplication, so in most cases there are two copies
+of orthologous genes. Sometimes the codes are conflicting. For example, one copy
+is stable in position (S), another has transposed (F). In this case, our rule is to report the
+gene in poplar as stable, i.e. S takes priority over F. The priorities for our
+codes are S, F, FB, FN, G, in this order.
+</p>
 <p>
 <a href="/static/example1.png" class="top_up">
 <img class="logoimg" src="/static/example1s.png" alt="" / >

@@ -16,10 +16,14 @@
   {% endfor %}
   </select>
   <br />
-  <b>or</b> Specify the <a href="#"
-      onclick="$('#synteny').toggle(); $('#gid').val('');">synteny</a> in outgroup lineages
+  <b>or</b> Specify the synteny in outgroup lineages
   <br />
-  <br />
+  <div style="float: right; width: 400px; margin: 5px; padding: 5px; border: 1px
+      solid slategray; fontcolor: slategray;" id="codehint">
+      <p> In the result table, <b>S</b> is stable, everything else is 
+      interpreted as unstable (transposed or lost) or missing data (-). See details of our codes in
+      the <a href="/athaliana/methods">Methods</a>.</p>
+  </div>
   <div id="synteny">
       {% for o in outgroups %} 
       <div class="radio">
@@ -35,6 +39,7 @@
   </div>
 </p>
   </form>
+  <br />
   <button onclick="submit();">Submit</button>
   <button onclick="reset();">Reset</button>
   <hr />
@@ -83,7 +88,7 @@
           {% if single %}
           <hr />
           <a target='_blank' href='{{ single.gevo_link }}'>
-          <img src='/athaliana/simple.png?gid={{single.athaliana}}' alt='' />
+          <img style="border:none" src='/athaliana/simple.png?gid={{single.athaliana}}' alt='' />
           </a>
           {% endif %}
       </div>
