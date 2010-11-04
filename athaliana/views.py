@@ -7,11 +7,13 @@ from django.db.models import Count
 from bao.athaliana.models import Syntelog
 
 outgroups = ["lyrata", "papaya", "poplar", "grape"]
+description_key = "description"
 
 
 def get_families():
-    q = Syntelog.objects.values("gene_family").annotate(num_genes=Count('id'))
-    return sorted(x["gene_family"] for x in q if x["num_genes"] >= 10)
+    q = Syntelog.objects.values(description_key).annotate(num_genes=Count('id'))
+    return sorted([x[description_key] for x in q if x["num_genes"] >= 10],
+            key=lambda x: x.lower())
 
 
 # Create your views here.
@@ -52,11 +54,11 @@ def query(request):
     query = Syntelog.objects.all()
 
     if gid:
-        if gid.upper().startswith('AT'):
+        if gid.upper().startswith('AT') and gid[3] in 'gG': # e.g. AT5G54690
             query = query.filter(athaliana__iexact=gid)
         else:
             #query = query.filter(description__icontains=gid)
-            query = query.filter(gene_family__icontains=gid)
+            query = query.filter(description__icontains=gid)
 
     for o in outgroups:
         term = request.GET.get(o, 'A')

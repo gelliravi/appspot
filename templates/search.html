@@ -5,12 +5,14 @@
   <input id="gid" name="gid" type="text" value="{{ gid }}" size="30"
   style="color:red; font-weight: bold;" /> 
   (e.g. <a href="#" onclick="show_example('At5g54690');">At5g54690</a>,
-  <a href="#" onclick="show_example('U-box')">U-box</a>,
-  <a href="#" onclick="show_example('MADS-box')">MADS-box</a> 
+  <a href="#" onclick="show_example('F-box')">F-box</a>,
+  <a href="#" onclick="show_example('MADS-box')">MADS-box</a>, 
+  <a href="#" onclick="show_example('zinc finger')">zinc finger</a> 
   ) 
   <br />
   <b>or</b> Select a specific TAIR gene family
   <select onchange="show_example($(this).val())">
+      <option value="-"> - </option>
   {% for f in families %}
     <option value="{{ f }}"> {{ f }} </option>
   {% endfor %}
