@@ -6,14 +6,15 @@ from django.db.models import Count
 
 from bao.athaliana.models import Syntelog
 
-outgroups = ["lyrata", "papaya", "poplar", "grape"]
-description_key = "description"
-
 
 def get_families():
     q = Syntelog.objects.values(description_key).annotate(num_genes=Count('id'))
     return sorted([x[description_key] for x in q if x["num_genes"] >= 10],
             key=lambda x: x.lower())
+
+outgroups = ["lyrata", "papaya", "poplar", "grape"]
+description_key = "description"
+families = get_families()
 
 
 # Create your views here.
@@ -22,7 +23,7 @@ def index(request):
     params = {
             'outgroups': outgroups,
             'page_template': "search.html",
-            'families': get_families(),
+            'families': families,
             }
     output = render_to_response('index.html', params)
     return output 
@@ -90,7 +91,7 @@ def query(request):
             'counts': counts,
             'query_str': query_str,
             'page_template': "search.html",
-            'families': get_families(),
+            'families': families,
             }
     
     if counts==1:
